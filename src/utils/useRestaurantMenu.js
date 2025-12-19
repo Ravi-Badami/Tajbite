@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MENU_API } from "../utils/constants";
+import menuData from "../components/mocks/itemsMock.json";
 
 const useRestaurantMenu = (resId) => {
   const [resMenu, setResMenu] = useState(null);
@@ -9,11 +10,8 @@ const useRestaurantMenu = (resId) => {
   }, []);
 
   const fetchMenu = async () => {
-    const data = await fetch(MENU_API + resId);
-    const json = await data.json();
-    // console.log(json);
-
-    setResMenu(json?.data);
+    // Use local mock data instead of fetching from Swiggy API
+    setResMenu(menuData?.data);
   };
 
   return { resMenu };

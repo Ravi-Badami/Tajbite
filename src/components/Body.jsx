@@ -22,15 +22,20 @@ import CarouselShimmer from "./Carousel/CarouselShimmer";
 import ShimmerMenu from "./Menu/Shimmer/ShimmerMenu";
 import { updateShowCard } from "../utils/redux/searchSlice";
 import CorsError from "./Error/CorsError";
+import resMainData from "./mocks/resMainData.json";
 
 /** This is the  main body of the project  */
 const Body = () => {
   // useWhatsOnMind();
   const dispatch = useDispatch();
-  dispatch(updateShowCard(false));
   const result = useSelector((store) => store.restaurant.restaurantData);
   const [mobileError, setMobileError] = useState(false);
   const [desktopError, setDesktopError] = useState(false);
+
+  // Move dispatch to useEffect to avoid calling it during render
+  useEffect(() => {
+    dispatch(updateShowCard(false));
+  }, [dispatch]);
 
   /**
    *  *This useState hook will call the function which is fetching the data from the API  */
@@ -65,39 +70,8 @@ const Body = () => {
   /**
    * *This callback function will fetch the data from API */
   const fetchData = async () => {
-    try {
-      // Attempt to fetch data from API_DATA
-      // If fetching from API_DATA fails, attempt to fetch from API_DATA_MOBILE
-      const mobileResponse = await fetch(API_DATA_MOBILE);
-      if (mobileResponse.ok) {
-        const mobileJson = await mobileResponse.json();
-        mobileJson.data.cards.map((card) => objectOfRestaurant(card));
-      } else {
-        setDesktopError(true);
-
-        throw new Error(
-          `Failed to fetch data from API_DATA_MOBILE, status: ${mobileResponse}`,
-        );
-      }
-    } catch (error) {
-      console.error("error is", error);
-
-      try {
-        const response = await fetch(API_DATA);
-        if (response.ok) {
-          const json = await response.json();
-          json.data.cards.map((card) => objectOfRestaurant(card));
-        } else {
-          setMobileError(true);
-          throw new Error(
-            `Failed to fetch data from API_DATA_MOBILE, status: ${response}`,
-          );
-        }
-      } catch (mobileError) {
-        console.error("error is ", mobileError);
-        // Handle the error for the mobile request here
-      }
-    }
+    // Use local mock data instead of fetching from Swiggy API to avoid CORS errors
+    resMainData.data.cards.map((card) => objectOfRestaurant(card));
   };
 
   /*

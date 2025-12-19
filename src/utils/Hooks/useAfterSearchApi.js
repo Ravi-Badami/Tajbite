@@ -53,34 +53,69 @@ const useAfterSearchApi = (inputValue) => {
   }, [currentBtn]);
 
   const fetchDataClick = async () => {
-    const data = await fetch(
-      SEARCH_BY_CLICK + inputValue + SEARCH_BY_CLICK_2 + metadata,
-    );
+    // Mock search results data
+    const mockJson = {
+      data: {
+        cards: [
+          {},
+          {
+            groupedCard: {
+              cardGroupMap: {
+                DISH: {
+                  cards: [
+                    {
+                      card: {
+                        card: {
+                          info: {
+                            id: "1",
+                            name: "Chicken Burger",
+                            price: 15000,
+                            imageId: "mock-image",
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+                RESTAURANT: {
+                  cards: [
+                    {
+                      card: {
+                        card: {
+                          info: {
+                            id: "235618",
+                            name: "KFC",
+                            avgRating: 4.1,
+                            cuisines: ["Burgers", "Biryani"],
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
-    const json = await data.json();
-    setJsonData(json);
+    setJsonData(mockJson);
 
-    if (
-      json?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT === undefined
-    ) {
-      dispatch(addRestaurantData(""));
-    }
-    if (json?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH === undefined) {
-      dispatch(addDishData(""));
-    }
-
-    if (json?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH) {
+    if (mockJson?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH) {
       dispatch(updateCurrentButton("Dish"));
       dispatch(updateDisplayCategory("Dish"));
       dispatch(
-        addDishData(json?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH.cards),
+        addDishData(
+          mockJson?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH.cards,
+        ),
       );
-    } else if (json?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT) {
+    } else if (mockJson?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT) {
       dispatch(updateCurrentButton("Restaurant"));
       dispatch(updateDisplayCategory("Restaurant"));
       dispatch(
         addRestaurantData(
-          json?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT,
+          mockJson?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT,
         ),
       );
     }
@@ -88,14 +123,39 @@ const useAfterSearchApi = (inputValue) => {
   const fetchCardSwitch = async () => {
     if (!searchRestaurantData) {
       if (categoryCard === "Dish" && currentBtn === "Restaurant") {
-        const data = await fetch(
-          SEARCH_BY_ENTER + inputValue + SEARCH_BY_ENTER_2_RESTAURANT,
-        );
-        const json = await data.json();
+        // Mock data for restaurant search
+        const mockJson = {
+          data: {
+            cards: [
+              {
+                groupedCard: {
+                  cardGroupMap: {
+                    RESTAURANT: {
+                      cards: [
+                        {
+                          card: {
+                            card: {
+                              info: {
+                                id: "235618",
+                                name: "KFC",
+                                avgRating: 4.1,
+                                cuisines: ["Burgers", "Biryani"],
+                              },
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        };
 
         dispatch(
           addRestaurantData(
-            json?.data?.cards[0]?.groupedCard?.cardGroupMap.RESTAURANT,
+            mockJson?.data?.cards[0]?.groupedCard?.cardGroupMap.RESTAURANT,
           ),
         );
       }
@@ -104,13 +164,38 @@ const useAfterSearchApi = (inputValue) => {
     //memoization
     if (!searchDishData) {
       if (categoryCard === "Restaurant" && currentBtn === "Dish") {
-        const data = await fetch(
-          SEARCH_BY_ENTER + inputValue + SEARCH_BY_ENTER_2_DISH,
-        );
-        const json = await data.json();
+        // Mock data for dish search
+        const mockJson = {
+          data: {
+            cards: [
+              {
+                groupedCard: {
+                  cardGroupMap: {
+                    DISH: {
+                      cards: [
+                        {
+                          card: {
+                            card: {
+                              info: {
+                                id: "1",
+                                name: "Chicken Burger",
+                                price: 15000,
+                                imageId: "mock-image",
+                              },
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        };
         dispatch(
           addDishData(
-            json?.data?.cards[0]?.groupedCard?.cardGroupMap.DISH.cards,
+            mockJson?.data?.cards[0]?.groupedCard?.cardGroupMap.DISH.cards,
           ),
         );
       }
@@ -118,41 +203,70 @@ const useAfterSearchApi = (inputValue) => {
   };
 
   const fetchDataKeyboard = async () => {
-    const data = await fetch(SEARCH_BY_ENTER + inputValue + SEARCH_BY_ENTER_2);
+    // Mock search results data for keyboard input
+    const mockJson = {
+      data: {
+        cards: [
+          {},
+          {
+            groupedCard: {
+              cardGroupMap: {
+                DISH: {
+                  cards: [
+                    {
+                      card: {
+                        card: {
+                          info: {
+                            id: "1",
+                            name: "Chicken Burger",
+                            price: 15000,
+                            imageId: "mock-image",
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+                RESTAURANT: {
+                  cards: [
+                    {
+                      card: {
+                        card: {
+                          info: {
+                            id: "235618",
+                            name: "KFC",
+                            avgRating: 4.1,
+                            cuisines: ["Burgers", "Biryani"],
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        ],
+      },
+    };
 
-    const json = await data.json();
-    setJsonData(json);
+    setJsonData(mockJson);
 
-    if (
-      json?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT === undefined
-    ) {
-      dispatch(addRestaurantData(null));
-    }
-
-    if (keyboardCat === "Dish") {
-      if (json?.data?.cards[0]?.groupedCard?.cardGroupMap.DISH === undefined) {
-        dispatch(addDishData(null));
-      }
-    }
-
-    if (json?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH) {
+    if (mockJson?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH) {
       dispatch(updateCurrentButton("Dish"));
       dispatch(updateKeyboardCategory("Dish"));
       dispatch(
-        addDishData(json?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH.cards),
+        addDishData(
+          mockJson?.data?.cards[1]?.groupedCard?.cardGroupMap.DISH.cards,
+        ),
       );
     }
-    if (json?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT) {
+    if (mockJson?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT) {
       dispatch(updateCurrentButton("Restaurant"));
       dispatch(updateKeyboardCategory("Restaurant"));
-      if (
-        json?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT === undefined
-      ) {
-        dispatch(addRestaurantData(null));
-      }
       dispatch(
         addRestaurantData(
-          json?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT,
+          mockJson?.data?.cards[1]?.groupedCard?.cardGroupMap.RESTAURANT,
         ),
       );
     }
@@ -162,13 +276,38 @@ const useAfterSearchApi = (inputValue) => {
     //memoization
     if (!searchRestaurantData) {
       if (keyboardCat === "Dish" && currentBtn === "Restaurant") {
-        const data = await fetch(
-          SEARCH_BY_ENTER + inputValue + SEARCH_BY_ENTER_2_RESTAURANT,
-        );
-        const json = await data.json();
+        // Mock data for restaurant search
+        const mockJson = {
+          data: {
+            cards: [
+              {
+                groupedCard: {
+                  cardGroupMap: {
+                    RESTAURANT: {
+                      cards: [
+                        {
+                          card: {
+                            card: {
+                              info: {
+                                id: "235618",
+                                name: "KFC",
+                                avgRating: 4.1,
+                                cuisines: ["Burgers", "Biryani"],
+                              },
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        };
         dispatch(
           addRestaurantData(
-            json?.data?.cards[0]?.groupedCard?.cardGroupMap.RESTAURANT,
+            mockJson?.data?.cards[0]?.groupedCard?.cardGroupMap.RESTAURANT,
           ),
         );
       }
@@ -177,19 +316,40 @@ const useAfterSearchApi = (inputValue) => {
     //memoization
     if (!searchDishData) {
       if (keyboardCat === "Restaurant" && currentBtn === "Dish") {
-        const data = await fetch(
-          SEARCH_BY_ENTER + inputValue + SEARCH_BY_ENTER_2_DISH,
-        );
-        const json = await data.json();
+        // Mock data for dish search
+        const mockJson = {
+          data: {
+            cards: [
+              {
+                groupedCard: {
+                  cardGroupMap: {
+                    DISH: {
+                      cards: [
+                        {
+                          card: {
+                            card: {
+                              info: {
+                                id: "1",
+                                name: "Chicken Burger",
+                                price: 15000,
+                                imageId: "mock-image",
+                              },
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        };
         const finalData =
-          await json?.data?.cards[0]?.groupedCard?.cardGroupMap.DISH.cards;
+          mockJson?.data?.cards[0]?.groupedCard?.cardGroupMap.DISH.cards;
 
         if (finalData) {
           dispatch(addDishData(finalData));
-        }
-
-        if (searchDishData === undefined) {
-          dispatch(addDishData("No result"));
         }
 
         dispatch(addDishData(finalData));

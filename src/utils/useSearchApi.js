@@ -6,9 +6,25 @@ const useSearchApi = (input) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch(SEARCH_API_D + input);
-      const json = await data.json();
-      setSearch(json);
+      // Mock search suggestions data
+      const mockSuggestions = {
+        statusCode: 0,
+        data: {
+          suggestions: [
+            { text: "pizza", type: "RESTAURANT" },
+            { text: "burger", type: "DISH" },
+            { text: "chicken", type: "DISH" },
+            { text: "pasta", type: "DISH" },
+            { text: "kfc", type: "RESTAURANT" },
+            { text: "dominos", type: "RESTAURANT" },
+          ].filter(
+            (suggestion) =>
+              input &&
+              suggestion.text.toLowerCase().includes(input.toLowerCase()),
+          ),
+        },
+      };
+      setSearch(mockSuggestions);
     };
     const timer = setTimeout(() => {
       if (input === undefined) return;
