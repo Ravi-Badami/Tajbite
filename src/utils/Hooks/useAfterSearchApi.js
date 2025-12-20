@@ -27,7 +27,7 @@ const useAfterSearchApi = (inputValue) => {
     (store) => store.search.restaurantData,
   );
   const searchDishData = useSelector((store) => store.search.dishData);
-  const finalCta = CTA.replace("swiggy://explore?query=", "");
+  const finalCta = (CTA || "").replace("swiggy://explore?query=", "");
   const searchParams = new URLSearchParams(finalCta.split("&")[1]);
   const metadata = searchParams.get("metadata");
   const [jsonData, setJsonData] = useState("");

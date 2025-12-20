@@ -7,7 +7,7 @@ import {
   updateSearchType,
   updateShowCard,
 } from "../../../utils/redux/searchSlice";
-import { clearConfigCache } from "prettier";
+
 
 const DisplayCards = ({ text, type, imgId, cta, subCategory }) => {
   const dispatch = useDispatch();
