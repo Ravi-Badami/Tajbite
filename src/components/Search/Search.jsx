@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useSearchApi from "../../utils/useSearchApi";
 import { BACK_BUTTON, CLOSE_SVG } from "../../utils/svg/svg";
 import useAfterSearchApi from "../../utils/Hooks/useAfterSearchApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Suggestion from "./Suggestion/Suggestion";
 import {
   addDishData,
@@ -15,6 +15,7 @@ import SearchDisplayResults from "./DIshDisplay/SearchDisplayResults";
 
 const Search = () => {
   const [inputValue, setInputValues] = useState("");
+  const { dishId } = useParams();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,6 +23,12 @@ const Search = () => {
   const data = useSearchApi(inputValue);
 
   useAfterSearchApi();
+
+  useEffect(() => {
+    if (dishId) {
+      setInputValues(dishId);
+    }
+  }, [dishId]);
 
   const handleClick = () => {
     setInputValues("");

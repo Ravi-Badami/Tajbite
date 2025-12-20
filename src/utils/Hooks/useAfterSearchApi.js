@@ -72,6 +72,13 @@ const useAfterSearchApi = (inputValue) => {
                             price: 15000,
                             imageId: "mock-image",
                           },
+                          restaurant: {
+                            info: {
+                              areaName: "KFC",
+                              avgRating: 4.1,
+                              id: "235618",
+                            },
+                          },
                         },
                       },
                     },
@@ -84,9 +91,10 @@ const useAfterSearchApi = (inputValue) => {
                         card: {
                           info: {
                             id: "235618",
-                            name: "KFC",
+                            areaName: "KFC",
                             avgRating: 4.1,
                             cuisines: ["Burgers", "Biryani"],
+                            cloudinaryImageId: "mock-image",
                           },
                         },
                       },
@@ -137,9 +145,10 @@ const useAfterSearchApi = (inputValue) => {
                             card: {
                               info: {
                                 id: "235618",
-                                name: "KFC",
+                                areaName: "KFC",
                                 avgRating: 4.1,
                                 cuisines: ["Burgers", "Biryani"],
+                                cloudinaryImageId: "mock-image",
                               },
                             },
                           },
@@ -182,6 +191,13 @@ const useAfterSearchApi = (inputValue) => {
                                 price: 15000,
                                 imageId: "mock-image",
                               },
+                              restaurant: {
+                                info: {
+                                  areaName: "KFC",
+                                  avgRating: 4.1,
+                                  id: "235618",
+                                },
+                              },
                             },
                           },
                         },
@@ -222,6 +238,13 @@ const useAfterSearchApi = (inputValue) => {
                             price: 15000,
                             imageId: "mock-image",
                           },
+                          restaurant: {
+                            info: {
+                              areaName: "KFC",
+                              avgRating: 4.1,
+                              id: "235618",
+                            },
+                          },
                         },
                       },
                     },
@@ -234,9 +257,10 @@ const useAfterSearchApi = (inputValue) => {
                         card: {
                           info: {
                             id: "235618",
-                            name: "KFC",
+                            areaName: "KFC",
                             avgRating: 4.1,
                             cuisines: ["Burgers", "Biryani"],
+                            cloudinaryImageId: "mock-image",
                           },
                         },
                       },
@@ -290,9 +314,10 @@ const useAfterSearchApi = (inputValue) => {
                             card: {
                               info: {
                                 id: "235618",
-                                name: "KFC",
+                                areaName: "KFC",
                                 avgRating: 4.1,
                                 cuisines: ["Burgers", "Biryani"],
+                                cloudinaryImageId: "mock-image",
                               },
                             },
                           },
@@ -333,6 +358,13 @@ const useAfterSearchApi = (inputValue) => {
                                 name: "Chicken Burger",
                                 price: 15000,
                                 imageId: "mock-image",
+                              },
+                              restaurant: {
+                                info: {
+                                  areaName: "KFC",
+                                  avgRating: 4.1,
+                                  id: "235618",
+                                },
                               },
                             },
                           },

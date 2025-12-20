@@ -17,7 +17,7 @@ const DishesBodyCards = ({ data }) => {
         <DishesCardTop areaName={areaName} avgRating={avgRating} id={id} />
         {"------------------------"}
         <DishesCardBottom
-          bestSeller={bestSeller.text}
+          bestSeller={bestSeller?.text}
           name={name}
           price={price}
           card={data.card}
