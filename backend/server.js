@@ -1,8 +1,21 @@
-const express=require("express");
+require('dotenv').config();
+const express=require('express');
+const mongoose=require('mongoose');
+const cors=require('cors');
+
 const app=express();
 
-app.get('/',(req,res)=>{
-  res.send("This is the working");
-})
+//middleware
+app.use(express.json());//ALlow us to accept the JSON data in the body
 
-app.listen(5000);
+app.use(cors());
+
+app.get('/',(req,res)=>{
+  res.send("APi is running...");
+});
+
+const PORT=process.env.PORT||5000;
+
+app.listen(PORT,()=>{
+  console.log(`server running on port ${Port}`)
+})
