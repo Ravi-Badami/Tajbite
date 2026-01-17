@@ -2,6 +2,7 @@ require('dotenv').config();
 const express=require('express');
 const mongoose=require('mongoose');
 const cors=require('cors');
+const dishRoutes=require("./routes/dishRoutes")
 
 const app=express();
 
@@ -13,6 +14,8 @@ connectDB();
 app.use(express.json());//ALlow us to accept the JSON data in the body
 
 app.use(cors());
+
+app.use(dishRoutes);
 
 app.get('/',(req,res)=>{
   res.send("APi is running...");
