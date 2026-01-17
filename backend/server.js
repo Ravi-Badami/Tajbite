@@ -5,6 +5,10 @@ const cors=require('cors');
 
 const app=express();
 
+// Connect to Database
+const connectDB = require('./config/db');
+connectDB();
+
 //middleware
 app.use(express.json());//ALlow us to accept the JSON data in the body
 
