@@ -13,13 +13,26 @@ const dishSchema=new mongoose.Schema({
     type:Number,
     required:true
   },
-  image:{
-    type:String,
-  required:true},
-  isVegetarian:{
+  isVeg:{
     type:Boolean,
     default:true
-  }
+  },
+  imageId:{
+    type:String,
+    required:true
+  },
+  description:{
+    type:String
+  },
+  restaurant:{
+    info:{
+      id:{type:String},
+      name:{type:String},
+      areaName:{type:String},
+      avgRating:{type:String}
+    },
+  },
+    ribbon:{text:{type:String}}
 }
 ,{
   timestamps:true

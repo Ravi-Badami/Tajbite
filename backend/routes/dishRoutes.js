@@ -4,10 +4,28 @@ const Dish = require('../models/Dish');
 
 // @desc    Get all dishes
 // @route   GET /api/dishes
-router.get('/', async (req, res) => {
+router.get('/api/dishes', async (req, res) => {
     try {
         const dishes = await Dish.find({});
-        res.json(dishes);
+         // Transform each dish to match frontend structure
+        const formattedDishes = dishes.map(dish => ({
+            card: {
+                card: {
+                    info: {
+                        name: dish.name,
+                        price: dish.price,
+                        isVeg: dish.isVeg,
+                        imageId: dish.imageId,
+                        description: dish.description
+                    },
+                    restaurant: {
+                        info: dish.restaurant?.info || {}
+                    }
+                }
+            },
+            ribbon: dish.ribbon
+        }));
+        res.json(formattedDishes);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
