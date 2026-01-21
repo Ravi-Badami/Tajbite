@@ -20,7 +20,8 @@ const sampleDishes = [
         id: "r1",
         name: "Paradise Hotel",
         areaName: "Secunderabad",
-        avgRating: "4.2"
+        avgRating: 4.2,  // ✅ Number
+        cuisines: ["Biryani", "North Indian", "Mughlai"]  // ✅ Add this
       }
     },
     ribbon: { text: "Bestseller" }
@@ -37,10 +38,10 @@ const sampleDishes = [
         id: "r2",
         name: "Mehfil",
         areaName: "Hitech City",
-        avgRating: "4.0"
+        avgRating: 4.0,  // ✅ Number
+        cuisines: ["North Indian", "Punjabi"]  // ✅ Add this
       }
     }
-    // No ribbon for this one
   }
 ];
 

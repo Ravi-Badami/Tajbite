@@ -29,7 +29,8 @@ const dishSchema=new mongoose.Schema({
       id:{type:String},
       name:{type:String},
       areaName:{type:String},
-      avgRating:{type:String}
+        avgRating: { type: Number },  // ✅ Number for sorting
+      cuisines: [String]  // ✅ Add this
     },
   },
     ribbon:{text:{type:String}}
