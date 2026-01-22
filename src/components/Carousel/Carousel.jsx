@@ -22,7 +22,7 @@ const Carousel = () => {
         </div>
         <div className="hide-scrollbar flex overflow-x-scroll">
           <div className="flex select-none">
-            {foodName.map((card) => (
+            {Array.isArray(foodName) && foodName.map((card) => (
               <FoodItems key={card.id} image={card.imageId} />
             ))}
           </div>

@@ -11,8 +11,8 @@ const Suggestion = ({ data }) => {
             <DisplayCards
               text={card.text}
               type={card.type}
-              imgId={card.cloudinaryId}
-              cta={card?.cta?.link}
+              imgId={card.cloudinaryId || card.imageId}
+              cta={card?.cta?.link || ""}
               subCategory={card?.subCategory}
             />
           </Link>

@@ -82,12 +82,18 @@ const Body = () => {
       const restaurants = await restaurantsResponse.json();
       
       // Transform backend response to match frontend structure
-      const formattedData = restaurants.map(r => ({
-        info: r.card.card.info
-      }));
-      
-      dispatch(addRestaurantData(formattedData));
-      dispatch(addRestaurantFilterData(formattedData));
+      if (Array.isArray(restaurants)) {
+        const formattedData = restaurants
+          .filter(r => r?.card?.card?.info)
+          .map(r => ({
+            info: r.card.card.info
+          }));
+        
+        dispatch(addRestaurantData(formattedData));
+        dispatch(addRestaurantFilterData(formattedData));
+      } else {
+        console.warn("API returned non-array data:", restaurants);
+      }
       
       // Fetch carousel data from backend
       const carouselResponse = await fetch(`${BASE_URL}/api/carousel`);

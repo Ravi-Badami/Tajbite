@@ -28,7 +28,14 @@ const useSearchApi = (input) => {
         }
         
         const data = await response.json();
-        setSearch(data);
+        
+        // Validation to prevent "cannot read properties of undefined" later
+        if (data && data.search) {
+          setSearch(data);
+        } else {
+          // Fallback structure if response is malformed
+          setSearch({ search: { statusCode: 0, data: { suggestions: [] } } });
+        }
       } catch (error) {
         console.error('Error fetching autocomplete:', error);
         setSearch({ search: { statusCode: 0, data: { suggestions: [] } } });

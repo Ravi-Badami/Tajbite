@@ -38,11 +38,16 @@ const useAfterSearchApi = () => {
       const dishData = await dishResponse.json();
       const restaurantData = await restaurantResponse.json();
       
-      // Dispatch data to Redux
+      // Dispatch data to Redux with safety checks
       // DishesBody expects an Array
+      dispatch(addDishData(Array.isArray(dishData) ? dishData : []));
+      
       // RestaurantBody expects an Object with .cards
-      dispatch(addDishData(dishData));
-      dispatch(addRestaurantData({ cards: restaurantData })); 
+      const safeRestaurantData = (restaurantData && restaurantData.cards) 
+        ? restaurantData 
+        : { cards: [] };
+        
+      dispatch(addRestaurantData({ cards: safeRestaurantData.cards || [] })); 
       
       dispatch(updateCurrentButton("Dish"));
       dispatch(updateDisplayCategory("Dish"));

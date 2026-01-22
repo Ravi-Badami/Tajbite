@@ -25,12 +25,7 @@ const RestaurantMenu = () => {
   if (resMenu.resMenu === null) return <Shimmer />;
 
   const onlyData = resMenu.resMenu.cards.map((card) => {
-    if (card.groupedCard === undefined) {
-      return null;
-    }
-    {
-      return card?.groupedCard?.cardGroupMap?.REGULAR?.cards;
-    }
+    return card?.groupedCard?.cardGroupMap?.REGULAR?.cards || null;
   });
 
   /* 
@@ -53,19 +48,15 @@ const RestaurantMenu = () => {
   const ravi = resMenu?.resMenu;
   // console.log(ravi);
 
-  const catch2 = ravi.cards.filter((a) => {
-    if (
+  const restaurantInfoCard = ravi.cards.find(
+    (a) =>
       a?.card?.card?.["@type"] ===
       "type.googleapis.com/swiggy.presentation.food.v2.Restaurant"
-    ) {
-      return a.card.card.info;
-    }
-    return null;
-  });
-  // console.log(catch2);
+  );
+  
+  if (!restaurantInfoCard) return <Shimmer />;
 
-  // resMenu?.resMenu.filter((a) => console.log(a));
-  const { name, cuisines, costForTwoMessage } = catch2[0].card.card.info;
+  const { name, cuisines, costForTwoMessage } = restaurantInfoCard.card.card.info;
   //*if resMenu is undefined than shimmer ui will be shown or else menu will be shown
   return (
     <div className=" mt-24  min-h-screen   scroll-smooth text-center ">
