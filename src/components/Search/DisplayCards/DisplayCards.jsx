@@ -25,9 +25,9 @@ const DisplayCards = ({ text, type, imgId, cta, subCategory }) => {
       >
         <div className="  ">
           <img
-            src={SEARCH_ITEMS_IMAGE + imgId}
-            alt="img"
-            className="h-12 rounded-lg md:h-20"
+            src={imgId || `https://source.unsplash.com/100x100/?${text},food`}
+            alt={text}
+            className="h-16 w-16 md:h-20 md:w-20 rounded-lg object-cover"
           />
         </div>
         <div className="p-2 md:p-4">

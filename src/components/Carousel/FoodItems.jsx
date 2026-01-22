@@ -7,7 +7,7 @@ const FoodItems = ({ image }) => {
         {/* <div className="">{name}</div> */}
         <div className=" ">
           <div className="   flex h-20  w-20 items-center  justify-center md:h-36 md:w-36  ">
-            <img src={CAROUSEL_IMAGE + image} alt="" className="  " />
+            <img src={image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200'} alt="food category" className="w-full h-full object-cover rounded-full" />
           </div>
         </div>
       </div>

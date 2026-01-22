@@ -14,9 +14,9 @@ const EachCard = ({ areaName, avgRating, image, cuisine }) => {
       className=" mb-6 h-48 w-[9.625rem] cursor-pointer rounded-lg  border-2 shadow-md  shadow-gray-300 drop-shadow-xl transition-all hover:-translate-y-1 hover:bg-gray-100 md:mb-0 md:h-72 md:w-60  "
     >
       <img
-        className="h-[60%] w-full rounded-lg"
-        src={RESTUARATANT_IMAGE + image}
-        alt=""
+        className="h-[60%] w-full rounded-lg object-cover"
+        src={image}
+        alt={areaName}
       />
       <div className="  px-2 py-2 md:py-5">
         <h3 className=" text-xs font-black md:text-base">

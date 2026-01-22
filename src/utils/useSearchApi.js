@@ -1,41 +1,51 @@
 import { useEffect, useState } from "react";
-import { SEARCH_API_D } from "./constants";
+import { BASE_URL, USE_BACKEND } from "../config/api";
 
 const useSearchApi = (input) => {
   const [search, setSearch] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      // Mock search suggestions data
-      const mockSuggestions = {
-        statusCode: 0,
-        data: {
-          suggestions: [
-            { text: "pizza", type: "RESTAURANT" },
-            { text: "burger", type: "DISH" },
-            { text: "chicken", type: "DISH" },
-            { text: "pasta", type: "DISH" },
-            { text: "kfc", type: "RESTAURANT" },
-            { text: "dominos", type: "RESTAURANT" },
-          ].filter(
-            (suggestion) =>
-              input &&
-              suggestion.text.toLowerCase().includes(input.toLowerCase()),
-          ),
-        },
-      };
-      setSearch(mockSuggestions);
+      if (!input || input.trim() === '') {
+        // Return empty suggestions for empty input
+        setSearch({
+          search: {
+            statusCode: 0,
+            data: { suggestions: [] }
+          }
+        });
+        return;
+      }
+
+      try {
+        // Use real backend autocomplete
+        const response = await fetch(`${BASE_URL}/api/dishes/autocomplete?q=${input}`);
+        
+        if (!response.ok) {
+          console.warn('Autocomplete failed, using mock data');
+          setSearch({ search: { statusCode: 0, data: { suggestions: [] } } });
+          return;
+        }
+        
+        const data = await response.json();
+        setSearch(data);
+      } catch (error) {
+        console.error('Error fetching autocomplete:', error);
+        setSearch({ search: { statusCode: 0, data: { suggestions: [] } } });
+      }
     };
+
     const timer = setTimeout(() => {
       if (input === undefined) return;
       fetchData();
     }, 200);
+    
     return () => {
       clearTimeout(timer);
     };
   }, [input]);
 
-  // console.log("suggestions", search);
-  if (search) return { search };
+  return search;
 };
 export default useSearchApi;
+

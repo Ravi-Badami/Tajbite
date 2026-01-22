@@ -12,8 +12,9 @@ const CardOfRestaurant = ({ data }) => {
       <div className=" flex min-w-full gap-3  rounded-xl border-t-4 border-red-500 p-4 shadow-lg shadow-gray-400 md:w-96">
         <div className="md:w-1/3">
           <img
-            src={DISPLAY_RESULT_IMAGE + cloudinaryImageId}
-            className="h-24 w-24 rounded-lg  "
+            src={cloudinaryImageId}
+            alt={areaName}
+            className="h-24 w-24 rounded-lg object-cover"
           />
         </div>
         <div className="flex w-2/3 flex-col  gap-2   text-start ">

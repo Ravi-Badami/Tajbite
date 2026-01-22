@@ -9,14 +9,14 @@ const RestaurantCard = (props) => {
   // eslint-disable-next-line react/prop-types
   const { resData } = props;
   // eslint-disable-next-line no-unsafe-optional-chaining
-  const { name, areaName, avgRating } = resData?.info;
+  const { name, areaName, avgRating, cloudinaryImageId } = resData?.info;
 
   return (
     <div
       data-testid="resCard"
       className=" h-64 w-56 rounded-lg border-2 border-solid border-black"
     >
-      <img src="" alt="" />
+      <img src={cloudinaryImageId} alt={name} className="h-32 w-full object-cover rounded-t-lg" />
       <h3 className="mt-10 font-black">{name}</h3>
       <h4>{areaName}</h4>
       <h4>{avgRating} stars</h4>

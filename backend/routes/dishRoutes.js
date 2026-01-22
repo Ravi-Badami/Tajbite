@@ -1,46 +1,36 @@
 const express = require('express');
 const router = express.Router();
 const Dish = require('../models/Dish');
+const {body,validationResult}=require("express-validator");
+const {
+getDishes,
+getDishById,
+createDish,
+updateDish,
+deleteDish,
+autocompleteDishes,
 
-// @desc    Get all dishes
-// @route   GET /api/dishes
-router.get('/api/dishes', async (req, res) => {
-    try {
-        const dishes = await Dish.find({});
-         // Transform each dish to match frontend structure
-        const formattedDishes = dishes.map(dish => ({
-            card: {
-                card: {
-                    info: {
-                        name: dish.name,
-                        price: dish.price,
-                        isVeg: dish.isVeg,
-                        imageId: dish.imageId,
-                        description: dish.description
-                    },
-                    restaurant: {
-                        info: dish.restaurant?.info || {}
-                    }
-                }
-            },
-            ribbon: dish.ribbon
-        }));
-        res.json(formattedDishes);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+}=require('../controllers/dishController');
 
-// @desc    Create a dish
-// @route   POST /api/dishes
-router.post('/', async (req, res) => {
-    try {
-        const dish = new Dish(req.body);
-        const savedDish = await dish.save(); // Saves to MongoDB
-        res.status(201).json(savedDish);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
+
+router.get('/autocomplete',autocompleteDishes);
+
+router.get('/',getDishes);
+router.get('/:id',getDishById);
+router.post('/',[
+  body('name').notEmpty().withMessage('Name is required'),
+  body('price').notEmpty().withMessage('Price must be a number'),
+  body('category').notEmpty().withMessage("category is needed")
+],(req,res,next)=>{
+  const errors=validationResult(req);
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors:errors.array()});
+  }
+  next();
+},createDish);
+router.put('/:id',updateDish);
+router.delete('/:id',deleteDish);
+
+
 
 module.exports = router;

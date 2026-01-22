@@ -1,6 +1,7 @@
 import RestaurantCard, { PromotedCard } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import { API_DATA, API_DATA2, API_DATA_MOBILE } from "../utils/constants";
+import { BASE_URL, USE_BACKEND } from "../config/api";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -70,8 +71,35 @@ const Body = () => {
   /**
    * *This callback function will fetch the data from API */
   const fetchData = async () => {
-    // Use local mock data instead of fetching from Swiggy API to avoid CORS errors
-    resMainData.data.cards.map((card) => objectOfRestaurant(card));
+    try {
+      // Fetch restaurants from backend
+      const restaurantsResponse = await fetch(`${BASE_URL}/api/restaurants`);
+      
+      if (!restaurantsResponse.ok) {
+        throw new Error('Failed to fetch restaurants');
+      }
+      
+      const restaurants = await restaurantsResponse.json();
+      
+      // Transform backend response to match frontend structure
+      const formattedData = restaurants.map(r => ({
+        info: r.card.card.info
+      }));
+      
+      dispatch(addRestaurantData(formattedData));
+      dispatch(addRestaurantFilterData(formattedData));
+      
+      // Fetch carousel data from backend
+      const carouselResponse = await fetch(`${BASE_URL}/api/carousel`);
+      
+      if (carouselResponse.ok) {
+        const carouselData = await carouselResponse.json();
+        dispatch(addName(carouselData.name));
+        dispatch(addAllFoodTypes(carouselData.foodItems));
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   /*

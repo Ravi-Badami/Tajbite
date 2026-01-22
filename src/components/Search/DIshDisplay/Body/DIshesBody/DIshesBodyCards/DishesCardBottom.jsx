@@ -57,8 +57,9 @@ const DishesCardBottom = ({
       </div>
       <div className="">
         <img
-          src={DISPLAY_RESULT_IMAGE + imageId}
-          className="borde h-24 w-24 rounded-lg border-black  "
+          src={imageId || `https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200`}
+          alt={name}
+          className="h-24 w-24 rounded-lg object-cover"
         />
 
         <button

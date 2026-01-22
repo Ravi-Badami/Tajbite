@@ -107,8 +107,9 @@ const ItemList = ({ data, cart }) => {
 
             <div className="flex justify-between ">
               <img
-                src={MENU_IMAGE + e.card.info.imageId}
-                className="mb-4 h-24 w-24 select-none border md:h-24 md:w-24"
+                src={e.card.info.imageId}
+                className="mb-4 h-24 w-24 select-none border md:h-24 md:w-24 object-cover rounded-lg"
+                alt={e.card.info.name}
                 onError="this.onerror=null"
               />
               {cart === "true" && (
