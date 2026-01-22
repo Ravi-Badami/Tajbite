@@ -12,7 +12,7 @@ const Suggestion = ({ data }) => {
               text={card.text}
               type={card.type}
               imgId={card.cloudinaryId || card.imageId}
-              cta={card?.cta?.link || ""}
+              cta={ (card && card.cta && card.cta.link) ? card.cta.link : "" }
               subCategory={card?.subCategory}
             />
           </Link>

@@ -23,7 +23,7 @@ import CarouselShimmer from "./Carousel/CarouselShimmer";
 import ShimmerMenu from "./Menu/Shimmer/ShimmerMenu";
 import { updateShowCard } from "../utils/redux/searchSlice";
 import CorsError from "./Error/CorsError";
-import resMainData from "./mocks/resMainData.json";
+// import resMainData from "./mocks/resMainData.json";
 
 /** This is the  main body of the project  */
 const Body = () => {
